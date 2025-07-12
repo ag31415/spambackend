@@ -59,12 +59,12 @@ def check_spam():
   except Exception as e:
     return jsonify({'error':str(e)})
 
+from flask import send_from_directory
+import os
+
 @app.route('/')
 def index():
-  with open('index.html', 'r') as f:
-    return f.read()
-
-import os
+    return send_from_directory(os.path.dirname(__file__), 'index.html')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "10000"))  # Default must match Flask's fallback
